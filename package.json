@@ -1,0 +1,11 @@
+{
+  "name": "simple-node-webscraping",
+  "version": "1.0.0",
+  "description": "Simple Node Web Scraping",
+  "main": "index.js",
+  "scripts": {
+    "server": "node index.js"
+  },
+  "author": "Claudio Castro",
+  "license": "ISC"
+}
