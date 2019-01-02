@@ -1,19 +1,21 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const express = require('express');
 
-const http = require('http'),
-  server = http.createServer();
+const app = express();
 
-server.on('request', async (request, response) => {
-  response.writeHead(200, { 'Content-Type': 'text/plain' });
-  response.write('LAST VOXEL GAME RATINGS');
-  response.end();
+app.listen(3000, () => {
+  console.info('Application runing at port 3000');
 });
 
-server.listen(3000, () => {
-  console.log('Node server created at port 3000');
+app.get('/', (request, response) => {
+  response.send('Application open and runing');
 });
 
+app.get('/voxel_ratings', async (request, response) => {
+  const data = await scraping();
+  response.json(data);
+});
 
 const getData = html => {
   data = [];
@@ -27,12 +29,15 @@ const getData = html => {
   return data;
 };
 
+const scraping = () => {
   const url = 'https://www.voxel.com.br/analises';
   
-  axios.get(url)
+   axios.get(url)
     .then(response => {
-      console.log(getData(response.data));
+      const data = getData(response.data)
+      return data;
     })
     .catch(error => error);
+};
 
 
