@@ -4,6 +4,16 @@ const express = require('express');
 
 const app = express();
 
+// Ignore Favicon request
+app.use((request, response, next) => {
+  if (request.url === 'favicon.ico') {
+    response.writeHead(200, { 'Content-Type': 'image/x-icon' });
+    response.end();
+  } else {
+    next();
+  }
+});
+
 app.listen(3000, () => {
   console.info('Application runing at port 3000');
 });
