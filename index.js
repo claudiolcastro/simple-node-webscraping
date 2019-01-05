@@ -29,8 +29,13 @@ app.get('/', (request, response) => {
 });
 
 app.get('/voxel_ratings', async (request, response) => {
-  const data = await scraping();
-  response.json(data);
+  const url = 'https://www.voxel.com.br/analises';
+  axios.get(url)
+    .then(resp => {
+        response.json(getData(resp.data));
+    })
+    .catch(error => error);
+  
 });
 
 const getData = html => {
@@ -44,16 +49,4 @@ const getData = html => {
   });
   return data;
 };
-
-const scraping = () => {
-  const url = 'https://www.voxel.com.br/analises';
-  
-   axios.get(url)
-    .then(response => {
-      const data = getData(response.data)
-      return data;
-    })
-    .catch(error => error);
-};
-
 
