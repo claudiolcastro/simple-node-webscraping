@@ -18,8 +18,10 @@ app.use((request, response, next) => {
   }
 });
 
-app.listen(3000, () => {
-  console.info('Application runing at port 3000');
+const server = app.listen(3000, () => {
+  const host = server.address().address;
+  const port = server.address().port;
+  console.info(`Application runing at ${host}, port ${port}`);
 });
 
 app.use('/', require('./routes'))

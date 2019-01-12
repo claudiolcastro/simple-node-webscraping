@@ -12,6 +12,7 @@ router.get('/voxel_ratings', async (request, response) => {
   const url = 'https://www.voxel.com.br/analises';
   axios.get(url)
     .then(resp => {
+      response.status(200);
       response.json(getVoxelRatings(resp.data));
     })
     .catch(error => error);
@@ -22,6 +23,7 @@ router.get('/musal_aircrafts', async (request, response) => {
   const url = 'http://www2.fab.mil.br/musal/index.php/anvs';
   axios.get(url)
     .then(resp => {
+      response.status(200);
       response.json(getMusalAirCrafts(resp.data));
     })
     .catch(error => error);
